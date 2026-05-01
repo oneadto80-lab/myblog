@@ -53,7 +53,7 @@ export default function LabPage() {
             color: "#ffffff",
           }}
         >
-          实验室
+          Lab
         </h1>
         <p
           className="uppercase lab-subtitle"
@@ -65,7 +65,7 @@ export default function LabPage() {
             marginTop: "1.5rem",
           }}
         >
-          即将推出
+          即将推出...
         </p>
       </motion.main>
       <style jsx>{`

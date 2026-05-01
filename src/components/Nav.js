@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import GooeyNav from "@/components/GooeyNav";
 
 const NAV_ITEMS = [
   { label: "作品", href: "/projects" },
@@ -14,15 +12,6 @@ const NAV_ITEMS = [
 export default function Nav() {
   const pathname = usePathname();
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(max-width: 640px)");
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
   const isSubpage = pathname !== "/";
   const isHome = !isSubpage;
   const isProjects =
@@ -37,21 +26,6 @@ export default function Nav() {
     : "1px solid rgba(0,0,0,0.08)";
   const textColorClass = useDarkNav ? "text-white" : "";
   const textColorStyle = useDarkNav ? undefined : "#111111";
-
-  let activeIndex = -1;
-  if (isProjects) activeIndex = 0;
-  else if (isAbout) activeIndex = 1;
-  else if (isLab) activeIndex = 2;
-
-  const handleNavClick = (e) => {
-    const a = e.target.closest && e.target.closest("a[href]");
-    if (!a) return;
-    const href = a.getAttribute("href");
-    if (!href || /^https?:/i.test(href)) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-    e.preventDefault();
-    router.push(href);
-  };
 
   return (
     <nav
@@ -89,32 +63,30 @@ export default function Nav() {
             Oneadto
           </Link>
         </div>
-        <div
-          onClickCapture={handleNavClick}
-          className="gooey-nav-wrapper"
-          style={{
-            fontFamily: "var(--font-inter), sans-serif",
-            fontSize: "14px",
-            letterSpacing: "0.04em",
-            textTransform: "uppercase",
-            fontWeight: 500,
-            width: "clamp(136px, 36vw, 240px)",
-            flexShrink: 0,
-            overflow: "visible",
-          }}
+        <ul
+          className="flex list-none m-0 p-0"
+          style={{ gap: 'clamp(0.5rem, 2vw, 1.5rem)' }}
         >
-          <GooeyNav
-            key={pathname}
-            items={NAV_ITEMS}
-            initialActiveIndex={activeIndex}
-            particleCount={isMobile ? 9 : 15}
-            particleDistances={isMobile ? [70, 10] : [90, 10]}
-            particleR={isMobile ? 70 : 100}
-            animationTime={600}
-            timeVariance={300}
-            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-          />
-        </div>
+          {NAV_ITEMS.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`glass-link uppercase ${textColorClass}`}
+                style={{
+                  fontSize: '14px',
+                  fontWeight: 500,
+                  letterSpacing: '0.08em',
+                  color: textColorStyle,
+                  minHeight: 44,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
       <style jsx>{`
         .nav-brand {
@@ -154,52 +126,6 @@ export default function Nav() {
           .nav-return-btn {
             padding-left: 0.5rem !important;
             padding-right: 0.5rem !important;
-          }
-        }
-      `}</style>
-      <style jsx global>{`
-        .gooey-nav-wrapper ul {
-          gap: 1.25rem;
-        }
-        .gooey-nav-wrapper {
-          flex-shrink: 0;
-        }
-        .gooey-nav-wrapper a {
-          min-height: 36px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-        }
-        @media (max-width: 640px) {
-          .gooey-nav-wrapper {
-            font-size: 14px !important;
-            letter-spacing: 0.03em !important;
-            width: 142px;
-            overflow: visible;
-          }
-          .gooey-nav-wrapper ul {
-            width: 100%;
-            justify-content: space-between;
-            gap: 0.25rem !important;
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-          }
-          .gooey-nav-wrapper a {
-            min-width: 44px;
-            padding: 0.55em 0.45em !important;
-            min-height: 44px;
-          }
-        }
-        @media (max-width: 380px) {
-          .gooey-nav-wrapper {
-            width: 136px;
-          }
-          .gooey-nav-wrapper ul {
-            gap: 0.1rem !important;
-          }
-          .gooey-nav-wrapper a {
-            padding-left: 0.35em !important;
-            padding-right: 0.35em !important;
           }
         }
       `}</style>

@@ -9,8 +9,10 @@ const Ballpit = dynamic(() => import("@/components/Ballpit"), {
 
 export default function ProjectsBallpitBackground() {
   const [mounted, setMounted] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
     const frame = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(frame);
   }, []);
@@ -20,15 +22,19 @@ export default function ProjectsBallpitBackground() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 h-screen w-screen overflow-hidden bg-black"
+      className="fixed inset-0 z-0 h-screen w-screen overflow-hidden bg-black"
+      style={{ pointerEvents: 'none' }}
     >
-      <div className="absolute inset-0 h-screen w-screen">
+      <div
+        className="absolute inset-0 h-screen w-screen"
+        style={{ pointerEvents: isTouch ? 'none' : 'auto' }}
+      >
         <Ballpit
           count={100}
           gravity={0.5}
           friction={0.9975}
           wallBounce={0.95}
-          followCursor={false}
+          followCursor={!isTouch}
           colors={["#5227FF", "#7cff67", "#ff6b6b"]}
           rendererOptions={{
             antialias: true,

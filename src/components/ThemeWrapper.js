@@ -26,7 +26,10 @@ export default function ThemeWrapper({ children }) {
           }}
         />
       )}
-      <div className={useDarkTheme ? "theme-dark" : "theme-light"}>
+      <div
+        className={useDarkTheme ? "theme-dark" : "theme-light"}
+        style={{ display: "contents" }}
+      >
         {children}
       </div>
     </>

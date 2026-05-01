@@ -155,11 +155,14 @@ const GooeyNav = ({
           .effect.filter {
             filter: blur(7px) contrast(100) blur(0);
             mix-blend-mode: lighten;
+            -webkit-mix-blend-mode: lighten;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
           }
           .effect.filter::before {
             content: "";
             position: absolute;
-            inset: -75px;
+            inset: -20px;
             z-index: -2;
             background: black;
           }
@@ -270,7 +273,7 @@ const GooeyNav = ({
           }
         `}
       </style>
-      <div className="relative" ref={containerRef} style={{ width: '100%' }}>
+      <div className="relative" ref={containerRef} style={{ width: '100%', position: 'relative', isolation: 'isolate' }}>
         <nav
           className="flex relative"
           style={{ transform: 'translate3d(0,0,0.01px)', width: '100%' }}>

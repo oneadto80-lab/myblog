@@ -42,8 +42,7 @@ export default function RootLayout({ children }) {
         <ThemeWrapper>
           <Cursor />
           <Nav />
-          {/* 页面内容层 */}
-          <div style={{ position: "relative", zIndex: 10 }}>{children}</div>
+          {children}
         </ThemeWrapper>
       </body>
     </html>

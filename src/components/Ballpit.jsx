@@ -249,7 +249,6 @@ function S(e) {
     position: new r(),
     nPosition: new r(),
     hover: false,
-    touching: false,
     onEnter() {},
     onMove() {},
     onClick() {},
@@ -260,15 +259,9 @@ function S(e) {
     if (!b.has(e)) {
       b.set(e, t);
       if (!R) {
-        document.body.addEventListener('pointermove', M);
-        document.body.addEventListener('pointerleave', L);
-        document.body.addEventListener('click', C);
-
-        document.body.addEventListener('touchstart', TouchStart, { passive: false });
-        document.body.addEventListener('touchmove', TouchMove, { passive: false });
-        document.body.addEventListener('touchend', TouchEnd, { passive: false });
-        document.body.addEventListener('touchcancel', TouchEnd, { passive: false });
-
+        e.addEventListener('pointermove', M);
+        e.addEventListener('pointerleave', L);
+        e.addEventListener('click', C);
         R = true;
       }
     }
@@ -277,15 +270,9 @@ function S(e) {
     const t = e.domElement;
     b.delete(t);
     if (b.size === 0) {
-      document.body.removeEventListener('pointermove', M);
-      document.body.removeEventListener('pointerleave', L);
-      document.body.removeEventListener('click', C);
-
-      document.body.removeEventListener('touchstart', TouchStart);
-      document.body.removeEventListener('touchmove', TouchMove);
-      document.body.removeEventListener('touchend', TouchEnd);
-      document.body.removeEventListener('touchcancel', TouchEnd);
-
+      t.removeEventListener('pointermove', M);
+      t.removeEventListener('pointerleave', L);
+      t.removeEventListener('click', C);
       R = false;
     }
   };
@@ -308,7 +295,7 @@ function processInteraction() {
         t.onEnter(t);
       }
       t.onMove(t);
-    } else if (t.hover && !t.touching) {
+    } else if (t.hover) {
       t.hover = false;
       t.onLeave(t);
     }
@@ -330,63 +317,6 @@ function L() {
     if (t.hover) {
       t.hover = false;
       t.onLeave(t);
-    }
-  }
-}
-
-function TouchStart(e) {
-  if (e.touches.length > 0) {
-    e.preventDefault();
-    A.x = e.touches[0].clientX;
-    A.y = e.touches[0].clientY;
-
-    for (const [elem, t] of b) {
-      const rect = elem.getBoundingClientRect();
-      if (D(rect)) {
-        t.touching = true;
-        P(t, rect);
-        if (!t.hover) {
-          t.hover = true;
-          t.onEnter(t);
-        }
-        t.onMove(t);
-      }
-    }
-  }
-}
-
-function TouchMove(e) {
-  if (e.touches.length > 0) {
-    e.preventDefault();
-    A.x = e.touches[0].clientX;
-    A.y = e.touches[0].clientY;
-
-    for (const [elem, t] of b) {
-      const rect = elem.getBoundingClientRect();
-      P(t, rect);
-
-      if (D(rect)) {
-        if (!t.hover) {
-          t.hover = true;
-          t.touching = true;
-          t.onEnter(t);
-        }
-        t.onMove(t);
-      } else if (t.hover && t.touching) {
-        t.onMove(t);
-      }
-    }
-  }
-}
-
-function TouchEnd() {
-  for (const [, t] of b) {
-    if (t.touching) {
-      t.touching = false;
-      if (t.hover) {
-        t.hover = false;
-        t.onLeave(t);
-      }
     }
   }
 }
@@ -687,7 +617,13 @@ function createBallpit(e, t = {}) {
   const r = new a();
   let c = false;
 
-  e.style.touchAction = 'none';
+  const isTouch = window.matchMedia('(pointer: coarse)').matches;
+  if (!isTouch) {
+    e.style.touchAction = 'none';
+  } else {
+    e.style.touchAction = 'auto';
+    e.style.pointerEvents = 'none';
+  }
   e.style.userSelect = 'none';
   e.style.webkitUserSelect = 'none';
 
@@ -779,7 +715,13 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <canvas className={`${className} w-full h-full`} ref={canvasRef} />;
+  return (
+    <canvas
+      className={`${className} w-full h-full`}
+      ref={canvasRef}
+      style={{ display: 'block' }}
+    />
+  );
 };
 
 export default Ballpit;

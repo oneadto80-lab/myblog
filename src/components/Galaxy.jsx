@@ -220,14 +220,28 @@ export default function Galaxy({
     let program;
 
     function resize() {
-      const scale = 1;
-      renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (w === 0 || h === 0) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      renderer.setSize(w * dpr, h * dpr);
+      gl.canvas.style.width = w + 'px';
+      gl.canvas.style.height = h + 'px';
       if (program) {
-        program.uniforms.uResolution.value = new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height);
+        program.uniforms.uResolution.value = new Color(
+          gl.canvas.width,
+          gl.canvas.height,
+          gl.canvas.width / gl.canvas.height
+        );
       }
     }
     window.addEventListener('resize', resize, false);
-    resize();
+    window.addEventListener('orientationchange', () => setTimeout(resize, 300), false);
+
+    // Defer first resize to ensure iOS Safari has finished layout
+    requestAnimationFrame(() => {
+      resize();
+    });
 
     const geometry = new Triangle(gl);
     program = new Program(gl, {
@@ -283,6 +297,8 @@ export default function Galaxy({
     }
     animateId = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
+    gl.canvas.style.pointerEvents = 'none';
+    gl.canvas.style.touchAction = 'none';
 
     function handleMouseMove(e) {
       const rect = ctn.getBoundingClientRect();
@@ -304,6 +320,7 @@ export default function Galaxy({
     return () => {
       cancelAnimationFrame(animateId);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('orientationchange', resize);
       if (mouseInteraction) {
         ctn.removeEventListener('mousemove', handleMouseMove);
         ctn.removeEventListener('mouseleave', handleMouseLeave);
