@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -116,17 +114,6 @@ body {
   font-family: var(--font-cormorant), Georgia, serif;
 }
 
-.subtle-shadow {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-}
-
-.glass-button {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 .glass-card {
   background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(12px);
@@ -226,29 +213,12 @@ body {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
-.theme-light .light-page-nav-link {
-  background: rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: #111111;
-  box-shadow: none;
-}
-
-.theme-light .light-page-nav-link:hover {
-  background: rgba(0, 0, 0, 0.1);
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: none;
-}
-
 .theme-light .tech-tag {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #000000;
-}
-
-.theme-light .scroll-indicator-line {
-  background: rgba(0, 0, 0, 0.4);
 }
 
 .scroll-container {
@@ -344,59 +314,6 @@ body {
   .home-project-card > div:last-child {
     flex-shrink: 0;
     font-size: 13.5px !important;
-  }
-}
-
-.gooey-nav-wrapper {
-  flex-shrink: 0;
-}
-
-.gooey-nav-wrapper ul {
-  gap: 1.25rem;
-}
-
-.gooey-nav-wrapper a {
-  min-height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 640px) {
-  .gooey-nav-wrapper {
-    width: 142px;
-    overflow: visible;
-    font-size: 14px !important;
-    letter-spacing: 0.03em !important;
-  }
-
-  .gooey-nav-wrapper ul {
-    width: 100%;
-    justify-content: space-between;
-    gap: 0.25rem !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  .gooey-nav-wrapper a {
-    min-width: 44px;
-    min-height: 44px;
-    padding: 0.55em 0.45em !important;
-  }
-}
-
-@media (max-width: 380px) {
-  .gooey-nav-wrapper {
-    width: 136px;
-  }
-
-  .gooey-nav-wrapper ul {
-    gap: 0.1rem !important;
-  }
-
-  .gooey-nav-wrapper a {
-    padding-left: 0.35em !important;
-    padding-right: 0.35em !important;
   }
 }
 

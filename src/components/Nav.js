@@ -100,11 +100,6 @@ export default function Nav() {
         </ul>
       </div>
       <style jsx>{`
-        .nav-brand {
-          font-size: 26px;
-          line-height: 1;
-          white-space: nowrap;
-        }
         .nav-return-btn {
           min-height: 36px;
           display: inline-flex;
@@ -113,31 +108,6 @@ export default function Nav() {
           font-size: 14px;
           font-weight: 500;
           letter-spacing: 0.08em;
-        }
-        @media (max-width: 640px) {
-          .nav-left-group {
-            gap: 0.4rem;
-          }
-          .nav-brand {
-            font-size: 17.5px;
-          }
-          .nav-return-btn {
-            min-height: 44px;
-            padding: 0.35rem 0.58rem !important;
-            letter-spacing: 0.06em;
-          }
-        }
-        @media (max-width: 380px) {
-          .nav-left-group {
-            gap: 0.3rem;
-          }
-          .nav-brand {
-            font-size: 17px;
-          }
-          .nav-return-btn {
-            padding-left: 0.5rem !important;
-            padding-right: 0.5rem !important;
-          }
         }
       `}</style>
     </nav>

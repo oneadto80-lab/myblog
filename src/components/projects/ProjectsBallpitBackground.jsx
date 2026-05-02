@@ -12,7 +12,13 @@ export default function ProjectsBallpitBackground() {
   const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
-    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
+    const frame = requestAnimationFrame(() => {
+      setIsTouch(window.matchMedia('(pointer: coarse)').matches);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
     const frame = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(frame);
   }, []);

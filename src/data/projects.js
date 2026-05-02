@@ -4,7 +4,7 @@ export const projects = [
     slug: "morph",
     name: "Morph",
     description: "一个让团队实时协作编辑文档的轻量级工具",
-    year: "2024",
+    year: "2025",
     tech: ["React", "Node.js", "WebSocket", "PostgreSQL"],
     overview: [
       "Morph 是一款专为小型团队设计的实时文档协作工具。用户可以同时编辑同一份文档，所有改动即时同步，无需刷新页面。项目使用 WebSocket 实现实时通信，前端基于 React 构建，后端采用 Node.js + Express。",
@@ -15,7 +15,7 @@ export const projects = [
     slug: "folio",
     name: "Folio",
     description: "一个帮助独立设计师管理客户与项目的小型 CRM 工具",
-    year: "2024",
+    year: "2025",
     tech: ["Next.js", "Prisma", "SQLite", "Tailwind CSS"],
     overview: [
       "Folio 是一个面向自由职业设计师的轻量级客户管理系统。用户可以在其中记录客户信息、跟踪项目进度、发送简单报价单。整个应用使用 Next.js 全栈开发，数据库采用 SQLite，通过 Prisma 进行管理。",
@@ -26,7 +26,7 @@ export const projects = [
     slug: "trace",
     name: "Trace",
     description: "一个记录日常习惯并生成可视化报告的个人追踪应用",
-    year: "2025",
+    year: "2026",
     tech: ["React", "FastAPI", "Recharts", "Python"],
     overview: [
       "Trace 是一款帮助用户建立和坚持日常习惯的追踪工具。每天打卡后，应用会自动生成趋势图和月度报告，让用户直观看到自己的坚持轨迹。前端使用 React + Recharts 实现数据可视化，后端使用 FastAPI。",
