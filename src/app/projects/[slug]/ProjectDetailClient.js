@@ -49,10 +49,10 @@ export default function ProjectDetailClient({ project, next }) {
         <div
           className="flex gap-6 md:gap-8 project-detail-card"
           style={{
-            background: "rgba(0,0,0,0.34)",
-            border: "1px solid rgba(255,255,255,0.10)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
+            background: "rgba(255,255,255,0.07)",
+            border: "1px solid rgba(255,255,255,0.18)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
             borderRadius: 18,
           }}
         >
@@ -111,7 +111,7 @@ export default function ProjectDetailClient({ project, next }) {
         <div className="project-detail-next">
           <Link
             href={`/projects/${next.slug}`}
-            className="glass-link"
+            className="glass-link cursor-target"
             style={{
               fontSize: "14px",
               fontWeight: 500,
@@ -167,10 +167,16 @@ export default function ProjectDetailClient({ project, next }) {
           }
           .project-detail-card {
             padding: 1rem 1.1rem;
+            background: rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(255, 255, 255, 0.06) !important;
+            backdrop-filter: blur(2px) !important;
+            -webkit-backdrop-filter: blur(2px) !important;
           }
           .project-detail-body {
             font-size: 15.25px;
             line-height: 1.8;
+            color: #ffffff;
+            text-shadow: 0 0 24px rgba(255, 255, 255, 0.22), 0 1px 3px rgba(0, 0, 0, 0.8);
           }
           .project-detail-section {
             overflow-y: auto;
@@ -180,6 +186,12 @@ export default function ProjectDetailClient({ project, next }) {
           .project-detail-next {
             margin-top: 1rem;
             text-align: center;
+          }
+          .project-detail-next .glass-link {
+            background: rgba(255, 255, 255, 0.04) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+            text-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
           }
         }
         @media (max-width: 768px) and (max-height: 700px) {

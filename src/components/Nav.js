@@ -29,6 +29,7 @@ export default function Nav() {
 
   return (
     <nav
+      className="hidden sm:block"
       style={{
         position: "fixed",
         top: 0,
@@ -46,7 +47,7 @@ export default function Nav() {
           {isSubpage && (
             <button
               onClick={() => router.back()}
-              className={`glass-link font-sans uppercase nav-return-btn ${textColorClass}`}
+              className={`glass-link font-sans uppercase nav-return-btn cursor-target ${textColorClass}`}
               style={{
                 fontWeight: 500,
                 color: textColorStyle,
@@ -57,8 +58,18 @@ export default function Nav() {
           )}
           <Link
             href="/"
-            className={`font-display italic nav-brand ${textColorClass}`}
-            style={{ fontWeight: 500, color: textColorStyle }}
+            className={`cursor-target ${textColorClass}`}
+            style={{
+              fontFamily: "'Pinyon Script', cursive",
+              fontWeight: 400,
+              fontSize: "32px",
+              lineHeight: 1,
+              whiteSpace: "nowrap",
+              color: textColorStyle ?? "rgba(255,255,255,0.92)",
+              textShadow: useDarkNav ? "0 0 24px rgba(255,255,255,0.18)" : "none",
+              letterSpacing: "0.03em",
+              textDecoration: "none",
+            }}
           >
             Oneadto
           </Link>
@@ -71,7 +82,7 @@ export default function Nav() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`glass-link uppercase ${textColorClass}`}
+                className={`glass-link uppercase cursor-target ${textColorClass}`}
                 style={{
                   fontSize: '14px',
                   fontWeight: 500,
@@ -90,7 +101,7 @@ export default function Nav() {
       </div>
       <style jsx>{`
         .nav-brand {
-          font-size: 20px;
+          font-size: 26px;
           line-height: 1;
           white-space: nowrap;
         }

@@ -175,7 +175,7 @@ export default function Home() {
                   <motion.div
                     whileHover={{ x: 6 }}
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="glass-card home-project-card"
+                    className="glass-card home-project-card cursor-target"
                     style={{
                       padding: "2rem 2.5rem",
                       display: "flex",
@@ -265,7 +265,7 @@ export default function Home() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="glass-link uppercase text-white"
+                className="glass-link cursor-target uppercase text-white"
                 style={{
                   fontSize: "14px",
                   fontWeight: 500,
